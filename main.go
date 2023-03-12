@@ -26,7 +26,7 @@ var (
 	insecure     = os.Getenv("INSECURE_MODE")
 )
 
-func initTracer() func(context.Context) error {
+func startTracer() func(context.Context) error {
 
 	secureOption := otlptracegrpc.WithTLSCredentials(credentials.NewClientTLSFromCert(nil, ""))
 	if len(insecure) > 0 {
@@ -67,7 +67,7 @@ func initTracer() func(context.Context) error {
 
 func main() {
 
-	cleanup := initTracer()
+	cleanup := startTracer()
 	defer cleanup(context.Background())
 
 	r := gin.Default()
