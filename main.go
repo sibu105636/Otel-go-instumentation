@@ -67,8 +67,8 @@ func startTracer() func(context.Context) error {
 
 func main() {
 
-	cleanup := startTracer()
-	defer cleanup(context.Background())
+	init_trace := startTracer()
+	defer init_trace(context.Background())
 
 	r := gin.Default()
 	r.Use(otelgin.Middleware(serviceName))
